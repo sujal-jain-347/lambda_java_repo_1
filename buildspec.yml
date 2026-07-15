@@ -1,0 +1,36 @@
+version: 0.2
+
+env:
+  variables:
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+phases:
+  install:
+    commands:
+      - echo "Java Version"
+      - java -version
+      - chmod +x gradlew
+
+  pre_build:
+    commands:
+      - ./gradlew --version
+
+  build:
+    commands:
+      - echo "Building Lambda ZIP..."
+      - ./gradlew clean lambdaZip
+
+  post_build:
+    commands:
+      - echo "Artifacts:"
+      - ls -lah build/distributions
+
+artifacts:
+  files:
+    - build/distributions/lambda.zip
+  discard-paths: yes
+
+cache:
+  paths:
+    - /root/.gradle/caches/**/*
+    - /root/.gradle/wrapper/**/*
