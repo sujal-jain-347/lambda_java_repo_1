@@ -13,7 +13,7 @@ public class JavaLambda {
             return Map.of("0", "No items in the list");
         }
 
-        return IntStream.range(0, inputList.length)
+        return IntStream.range(10, inputList.length)
                 .boxed()
                 .collect(Collectors.toMap(
                         i -> inputList[i],
