@@ -18,3 +18,27 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+/**
+ * Creates a ZIP deployment package for AWS Lambda.
+ * Output:
+ *   build/distributions/lambda.zip
+ */
+tasks.register('lambdaZip', Zip) {
+    group = "build"
+    description = "Creates an AWS Lambda deployment ZIP."
+
+    archiveFileName.set("lambda.zip")
+    destinationDirectory.set(layout.buildDirectory.dir("distributions"))
+
+    dependsOn(tasks.classes)
+
+    // Compiled classes
+    from(sourceSets.main.output)
+
+    // Runtime dependencies (will be placed in lib/)
+    into("lib") {
+        from(configurations.runtimeClasspath)
+    }
+}
