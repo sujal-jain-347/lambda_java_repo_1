@@ -6,6 +6,8 @@ env:
 
 phases:
   install:
+    runtime-versions:
+      java: corretto25
     commands:
       - echo "Java Version"
       - java -version
@@ -17,20 +19,18 @@ phases:
 
   build:
     commands:
-      - echo "Building Lambda ZIP..."
-      - ./gradlew clean lambdaZip
+      - echo "Building project..."
+      - ./gradlew clean classes
 
   post_build:
     commands:
-      - echo "Artifacts:"
-      - ls -lah build/distributions
-      - echo "ZIP Contents:"
-      - unzip -l build/distributions/lambda.zip
+      - echo "Compiled classes:"
+      - find build/classes/java/main -type f
 
 artifacts:
+  base-directory: build/classes/java/main
   files:
-    - build/distributions/lambda.zip
-  discard-paths: yes
+    - '**/*'
 
 cache:
   paths:
