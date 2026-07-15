@@ -6,7 +6,13 @@ import java.util.stream.IntStream;
 
 public class JavaLambda {
 
-    public Map<String, String> handleRequest(String[] inputList) {
+    public Map<String, String> handleRequest(String[] inputList)
+    {
+
+        if(inputList == null){
+            return Map.of("0", "No items in the list");
+        }
+
         return IntStream.range(0, inputList.length)
                 .boxed()
                 .collect(Collectors.toMap(
