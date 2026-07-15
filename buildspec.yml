@@ -24,6 +24,8 @@ phases:
     commands:
       - echo "Artifacts:"
       - ls -lah build/distributions
+      - echo "ZIP Contents:"
+      - unzip -l build/distributions/lambda.zip
 
 artifacts:
   files:
