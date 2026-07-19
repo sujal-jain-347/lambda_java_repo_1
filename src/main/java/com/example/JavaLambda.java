@@ -10,7 +10,7 @@ public class JavaLambda {
     {
 
         if(inputList == null){
-            return Map.of("0", "No items in the list");
+            return Map.of("0", "No items in the list present");
         }
 
         return IntStream.range(0, inputList.length)
